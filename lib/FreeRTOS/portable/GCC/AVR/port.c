@@ -229,27 +229,6 @@ void vPortYield( void )
 /*-----------------------------------------------------------*/
 
 /*
- * Context switch function used by the tick.  This must be identical to 
- * vPortYield() from the call to vTaskSwitchContext() onwards.  The only
- * difference from vPortYield() is the tick count is incremented as the
- * call comes from the tick ISR. Because it is called from the tick ISR
- * there is no need to clear/enable the global interrupt
- */
-void vPortYieldFromTick( void ) __attribute__ ( ( naked ) );
-void vPortYieldFromTick( void )
-{
-	portSAVE_CONTEXT();
-	if( xTaskIncrementTick() != pdFALSE )
-	{
-		vTaskSwitchContext();
-	}
-	portRESTORE_CONTEXT();
-
-	asm volatile ( "ret" );
-}
-/*-----------------------------------------------------------*/
-
-/*
  * Setup timer 1 compare match A to generate a tick interrupt.
  */
 static void prvSetupTimerInterrupt( void )
@@ -292,14 +271,19 @@ uint8_t ucHighByte, ucLowByte;
 
 	/*
 	 * Tick ISR for preemptive scheduler.  We can use a naked attribute as
-	 * the context is saved at the start of vPortYieldFromTick().  The tick
+	 * the context is saved at the start of portSAVE_CONTEXT().  The tick
 	 * count is incremented after the context is saved.
 	 */
 	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
 	void SIG_OUTPUT_COMPARE1A( void )
 	{
-		vPortYieldFromTick();
-		asm volatile ( "reti" );
+	    portSAVE_CONTEXT();
+	    if( xTaskIncrementTick() != pdFALSE )
+	    {
+		vTaskSwitchContext();
+	    }
+	    portRESTORE_CONTEXT();
+	    asm volatile ( "reti" );
 	}
 #else
 
@@ -315,5 +299,3 @@ uint8_t ucHighByte, ucLowByte;
 	}
 #endif
 
-
-	
