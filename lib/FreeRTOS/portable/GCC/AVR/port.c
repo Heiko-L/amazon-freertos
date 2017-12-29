@@ -35,12 +35,12 @@ Changes from V2.6.0
 */
 
 #include <stdlib.h>
-#include <avr/interrupt.h>
 
 #include "FreeRTOS.h"
 #include "task.h"
 
 #include "context_macros.h"
+#include "setup_timer.h"
 
 /*-----------------------------------------------------------
  * Implementation of functions defined in portable.h for the AVR port.
@@ -49,26 +49,12 @@ Changes from V2.6.0
 /* Start tasks with interrupts enables. */
 #define portFLAGS_INT_ENABLED					( ( StackType_t ) 0x80 )
 
-/* Hardware constants for timer 1. */
-#define portCLEAR_COUNTER_ON_MATCH				( ( uint8_t ) 0x08 )
-#define portPRESCALE_64							( ( uint8_t ) 0x03 )
-#define portCLOCK_PRESCALER						( ( uint32_t ) 64 )
-#define portCOMPARE_MATCH_A_INTERRUPT_ENABLE	( ( uint8_t ) 0x10 )
-
 /*-----------------------------------------------------------*/
 
 /* We require the address of the pxCurrentTCB variable, but don't want to know
 any details of its type. */
 typedef void TCB_t;
 extern volatile TCB_t * volatile pxCurrentTCB;
-
-/*-----------------------------------------------------------*/
-
-/*
- * Perform hardware setup to enable ticks from timer 1, compare match A.
- */
-static void prvSetupTimerInterrupt( void );
-/*-----------------------------------------------------------*/
 
 /* 
  * See header file for description. 
@@ -228,74 +214,4 @@ void vPortYield( void )
 }
 /*-----------------------------------------------------------*/
 
-/*
- * Setup timer 1 compare match A to generate a tick interrupt.
- */
-static void prvSetupTimerInterrupt( void )
-{
-uint32_t ulCompareMatch;
-uint8_t ucHighByte, ucLowByte;
-
-	/* Using 16bit timer 1 to generate the tick.  Correct fuses must be
-	selected for the configCPU_CLOCK_HZ clock. */
-
-	ulCompareMatch = configCPU_CLOCK_HZ / configTICK_RATE_HZ;
-
-	/* We only have 16 bits so have to scale to get our required tick rate. */
-	ulCompareMatch /= portCLOCK_PRESCALER;
-
-	/* Adjust for correct value. */
-	ulCompareMatch -= ( uint32_t ) 1;
-
-	/* Setup compare match value for compare match A.  Interrupts are disabled 
-	before this is called so we need not worry here. */
-	ucLowByte = ( uint8_t ) ( ulCompareMatch & ( uint32_t ) 0xff );
-	ulCompareMatch >>= 8;
-	ucHighByte = ( uint8_t ) ( ulCompareMatch & ( uint32_t ) 0xff );
-	OCR1AH = ucHighByte;
-	OCR1AL = ucLowByte;
-
-	/* Setup clock source and compare match behaviour. */
-	ucLowByte = portCLEAR_COUNTER_ON_MATCH | portPRESCALE_64;
-	TCCR1B = ucLowByte;
-
-	/* Enable the interrupt - this is okay as interrupt are currently globally
-	disabled. */
-	ucLowByte = TIMSK;
-	ucLowByte |= portCOMPARE_MATCH_A_INTERRUPT_ENABLE;
-	TIMSK = ucLowByte;
-}
-/*-----------------------------------------------------------*/
-
-#if configUSE_PREEMPTION == 1
-
-	/*
-	 * Tick ISR for preemptive scheduler.  We can use a naked attribute as
-	 * the context is saved at the start of portSAVE_CONTEXT().  The tick
-	 * count is incremented after the context is saved.
-	 */
-	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
-	void SIG_OUTPUT_COMPARE1A( void )
-	{
-	    portSAVE_CONTEXT();
-	    if( xTaskIncrementTick() != pdFALSE )
-	    {
-		vTaskSwitchContext();
-	    }
-	    portRESTORE_CONTEXT();
-	    asm volatile ( "reti" );
-	}
-#else
-
-	/*
-	 * Tick ISR for the cooperative scheduler.  All this does is increment the
-	 * tick count.  We don't need to switch context, this can only be done by
-	 * manual calls to taskYIELD();
-	 */
-	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal ) );
-	void SIG_OUTPUT_COMPARE1A( void )
-	{
-		xTaskIncrementTick();
-	}
-#endif
 
