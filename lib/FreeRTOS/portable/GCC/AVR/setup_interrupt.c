@@ -1,5 +1,7 @@
 #include <avr/interrupt.h>
+#include "FreeRTOS.h"
 #include "context_macros.h"
+#include "setup_interrupt.h"
 
 #if configUSE_PREEMPTION == 1
 
@@ -8,8 +10,7 @@
 	 * the context is saved at the start of portSAVE_CONTEXT().  The tick
 	 * count is incremented after the context is saved.
 	 */
-	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
-	void SIG_OUTPUT_COMPARE1A( void )
+	ISR(PORT_TIMER_INTERRUPT_VECTOR, ISR_NAKED)
 	{
 	    portSAVE_CONTEXT();
 	    if( xTaskIncrementTick() != pdFALSE )
@@ -26,8 +27,7 @@
 	 * tick count.  We don't need to switch context, this can only be done by
 	 * manual calls to taskYIELD();
 	 */
-	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal ) );
-	void SIG_OUTPUT_COMPARE1A( void )
+	ISR(PORT_TIMER_INTERRUPT_VECTOR)
 	{
 		xTaskIncrementTick();
 	}
