@@ -7,15 +7,15 @@ extern "C" {
 
 #if (PORT_AVR_TIMER == 0)
 #define PORT_TIMER_INTERRUPT_VECTOR TIMER0_COMPA_vect
-#endif (PORT_AVR_TIMER == 0)
+#endif /* (PORT_AVR_TIMER == 0) */
 
 #if (PORT_AVR_TIMER == 1)
 #define PORT_TIMER_INTERRUPT_VECTOR TIMER1_COMPA_vect
-#endif (PORT_AVR_TIMER == 1)
+#endif /* (PORT_AVR_TIMER == 1) */
 
 #if (PORT_AVR_TIMER == 2)
 #define PORT_TIMER_INTERRUPT_VECTOR TIMER2_COMPA_vect
-#endif (PORT_AVR_TIMER == 2)
+#endif /* (PORT_AVR_TIMER == 2) */
 
 #ifdef __cplusplus
 }

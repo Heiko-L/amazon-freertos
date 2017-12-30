@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 #include "FreeRTOS.h"
+#include "task.h"
 #include "context_macros.h"
 #include "setup_interrupt.h"
 

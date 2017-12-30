@@ -80,8 +80,8 @@ static void vFindBestTimerValues(uint16_t *pusOutputCompareValue,
 }
 
 #if (PORT_AVR_TIMER == 0)
-static void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
-static void prvSetupTimerInterrupt(void) {
+static inline void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
+static inline void prvSetupTimerInterrupt(void) {
     uint16_t ucOC;
     uint8_t ucPrescaler;
 
@@ -94,8 +94,8 @@ static void prvSetupTimerInterrupt(void) {
 #endif /* (PORT_AVR_TIMER == 0) */
 
 #if (PORT_AVR_TIMER == 1)
-static void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
-static void prvSetupTimerInterrupt(void) {
+static inline void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
+static inline void prvSetupTimerInterrupt(void) {
     uint16_t usOC;
     uint8_t ucPrescaler;
 
@@ -107,8 +107,8 @@ static void prvSetupTimerInterrupt(void) {
 #endif /* (PORT_AVR_TIMER == 1) */
 
 #if (PORT_AVR_TIMER == 2)
-static void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
-static void prvSetupTimerInterrupt(void) {
+static inline void prvSetupTimerInterrupt( void ) __attribute__((always_inline));
+static inline void prvSetupTimerInterrupt(void) {
     uint16_t ucOC;
     uint8_t ucPrescaler;
 
