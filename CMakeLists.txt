@@ -30,6 +30,18 @@ configure_file(CMake/FreeRTOSConfig.h.in FreeRTOSConfig.h @ONLY)
 configure_file(CMake/FreeRTOSExternProvided.h.in FreeRTOSExternProvided.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+option(Compile_Queue "Compile queue.c" OFF)
+option(Compile_Timers "Compile timers.c" OFF)
+
+if (Compile_Queue)
+set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/queue.c)
+endif (Compile_Queue)
+
+if (Compile_Timers)
+set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/timers.c)
+set(Compile_Queue ON CACHE BOOL "" FORCE)
+endif (Compile_Timers)
+
 set(MANDATORY_SOURCE_FILES lib/FreeRTOS/tasks.c lib/FreeRTOS/list.c)
 
-add_library(${LIBNAME} ${MANDATORY_SOURCE_FILES})
+add_library(${LIBNAME} ${MANDATORY_SOURCE_FILES} ${OPTIONAL_SOURCE_FILES})
