@@ -20,10 +20,15 @@ if(DEFINED MCU_LIB_PATH)
 #install(FILES ${incfiles} DESTINATION "${MCU_LIB_PATH}/include")
 endif(DEFINED MCU_LIB_PATH)
 
-include(CMake/FreeRTOSConfig.cmake)
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
+include_directories(lib/FreeRTOS/portable/GCC/AVR)
+endif(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
 
+include(CMake/FreeRTOSConfig.cmake)
+include_directories(lib/include lib/include/private)
 configure_file(CMake/FreeRTOSConfig.h.in FreeRTOSConfig.h @ONLY)
 configure_file(CMake/FreeRTOSExternProvided.h.in FreeRTOSExternProvided.h @ONLY)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(MANDATORY_SOURCE_FILES lib/FreeRTOS/tasks.c lib/FreeRTOS/list.c)
 
