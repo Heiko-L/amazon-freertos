@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 3.9)
 PROJECT (libFreeRTOS C)
 
+include(crossconfig.cmake)
+
 IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Release CACHE STRING
       "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
@@ -8,12 +10,6 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
 SET(LIBNAME "FreeRTOS")
-
-include(CheckIPOSupported)
-check_ipo_supported(RESULT result)
-if(result)
-#  set_property(TARGET ${LIBNAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION True)
-endif()
 
 if(DEFINED MCU_LIB_PATH)
 #install(TARGETS hd44780 ARCHIVE DESTINATION ${MCU_LIB_PATH}/lib)
@@ -23,6 +19,7 @@ endif(DEFINED MCU_LIB_PATH)
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
 include_directories(lib/FreeRTOS/portable/GCC/AVR)
 set(INSTALL_HEADERS ${INSTALL_HEADERS} lib/FreeRTOS/portable/GCC/AVR/portmacro.h)
+set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/GCC/AVR/port.c)
 endif(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
 
 include(CMake/FreeRTOSConfig.cmake)
@@ -86,6 +83,11 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} lib/include lib/include/private)
 
 option(Compile_Queue "Compile queue.c" OFF)
 option(Compile_Timers "Compile timers.c" OFF)
+option(Compile_Heap1 "Compile heap1.c" ON)
+option(Compile_Heap2 "Compile heap2.c" OFF)
+option(Compile_Heap3 "Compile heap3.c" OFF)
+option(Compile_Heap4 "Compile heap4.c" OFF)
+option(Compile_Heap5 "Compile heap5.c" OFF)
 
 if (Compile_Queue)
 set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/queue.c)
@@ -96,9 +98,31 @@ set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/timers.c)
 set(Compile_Queue ON CACHE BOOL "" FORCE)
 endif (Compile_Timers)
 
+if (Compile_Heap1)
+    set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/MemMang/heap_1.c)
+elseif (Compile_Heap2)
+    set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/MemMang/heap_2.c)
+elseif (Compile_Heap3)
+    set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/MemMang/heap_3.c)
+elseif (Compile_Heap4)
+    set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/MemMang/heap_4.c)
+elseif (Compile_Heap5)
+    set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/MemMang/heap_5.c)
+endif (Compile_Heap1)
+
 set(MANDATORY_SOURCE_FILES lib/FreeRTOS/tasks.c lib/FreeRTOS/list.c)
 
 add_library(${LIBNAME} ${MANDATORY_SOURCE_FILES} ${OPTIONAL_SOURCE_FILES})
+
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+  set_property(TARGET ${LIBNAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION True)
+endif()
+
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -flto")
+
+add_definitions(-Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -c -std=gnu99)
 
 install(TARGETS ${LIBNAME} DESTINATION lib)
 install(FILES ${INSTALL_HEADERS} DESTINATION include)

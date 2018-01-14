@@ -56,7 +56,7 @@
 #define configMAX_API_CALL_INTERRUPT_PRIORITY					@configMAX_API_CALL_INTERRUPT_PRIORITY@
 
 /* Define to trap errors during development. */
-#define configASSERT											@configASSERT@
+// #define configASSERT											@configASSERT@
 
 /* FreeRTOS MPU specific definitions. */
 #define configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS	@configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS_Value@
