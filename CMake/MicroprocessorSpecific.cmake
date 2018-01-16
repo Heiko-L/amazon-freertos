@@ -1,0 +1,5 @@
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
+include_directories(lib/FreeRTOS/portable/GCC/AVR)
+set(INSTALL_HEADERS ${INSTALL_HEADERS} lib/FreeRTOS/portable/GCC/AVR/portmacro.h)
+set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} lib/FreeRTOS/portable/GCC/AVR/port.c)
+endif(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
