@@ -10,6 +10,7 @@
 
 #include <avr/io.h>
 #include "FreeRTOS.h"
+#include <FreeRTOS_uc.h>
 
 #define COMPA1024   (uint16_t)( (uint32_t)configCPU_CLOCK_HZ / ( (uint32_t)configTICK_RATE_HZ * (uint32_t)1024 ) - 1 )
 #define COMPA256    (uint16_t)( (uint32_t)configCPU_CLOCK_HZ / ( (uint32_t)configTICK_RATE_HZ * (uint32_t)256 ) - 1 )

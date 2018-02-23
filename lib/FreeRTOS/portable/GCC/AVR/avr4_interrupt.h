@@ -1,6 +1,8 @@
 #ifndef AVR4_INTERRUPT_H
 #define AVR4_INTERRUPT_H
 
+#include <FreeRTOS_uc.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
