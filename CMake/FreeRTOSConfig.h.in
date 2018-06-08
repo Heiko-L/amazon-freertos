@@ -1,0 +1,83 @@
+#ifndef FREERTOS_CONFIG_H
+#define FREERTOS_CONFIG_H
+
+#define configUSE_PREEMPTION									@configUSE_PREEMPTION_Value@
+#define configUSE_PORT_OPTIMISED_TASK_SELECTION					@configUSE_PORT_OPTIMISED_TASK_SELECTION_Value@
+#define configUSE_TICKLESS_IDLE									@configUSE_TICKLESS_IDLE_Value@
+#define configCPU_CLOCK_HZ										@configCPU_CLOCK_HZ@
+#define configTICK_RATE_HZ										@configTICK_RATE_HZ@
+#define configMAX_PRIORITIES									@configMAX_PRIORITIES@
+#define configMINIMAL_STACK_SIZE								@configMINIMAL_STACK_SIZE@
+#define configMAX_TASK_NAME_LEN									@configMAX_TASK_NAME_LEN@
+#define configUSE_16_BIT_TICKS									@configUSE_16_BIT_TICKS_Value@
+#define configIDLE_SHOULD_YIELD									@configIDLE_SHOULD_YIELD_Value@
+#define configUSE_TASK_NOTIFICATIONS							@configUSE_TASK_NOTIFICATIONS_Value@
+#define configUSE_MUTEXES										@configUSE_MUTEXES_Value@
+#define configUSE_RECURSIVE_MUTEXES								@configUSE_RECURSIVE_MUTEXES_Value@
+#define configUSE_COUNTING_SEMAPHORES							@configUSE_COUNTING_SEMAPHORES_Value@
+#define configQUEUE_REGISTRY_SIZE								@configQUEUE_REGISTRY_SIZE@
+#define configUSE_QUEUE_SETS									@configUSE_QUEUE_SETS_Value@
+#define configUSE_TIME_SLICING									@configUSE_TIME_SLICING_Value@
+#define configUSE_NEWLIB_REENTRANT								@configUSE_NEWLIB_REENTRANT_Value@
+#define configENABLE_BACKWARD_COMPATIBILITY						@configENABLE_BACKWARD_COMPATIBILITY_Value@
+#define configNUM_THREAD_LOCAL_STORAGE_POINTERS					@configNUM_THREAD_LOCAL_STORAGE_POINTERS@
+
+/* Memory allocation related definitions. */
+#define configSUPPORT_STATIC_ALLOCATION							@configSUPPORT_STATIC_ALLOCATION_Value@
+#define configSUPPORT_DYNAMIC_ALLOCATION						@configSUPPORT_DYNAMIC_ALLOCATION_Value@
+#define configTOTAL_HEAP_SIZE									@configTOTAL_HEAP_SIZE@
+#define configAPPLICATION_ALLOCATED_HEAP						@configAPPLICATION_ALLOCATED_HEAP_Value@
+
+/* Hook function related definitions. */
+#define configUSE_IDLE_HOOK										@configUSE_IDLE_HOOK_Value@
+#define configUSE_TICK_HOOK										@configUSE_TICK_HOOK_Value@
+#define configCHECK_FOR_STACK_OVERFLOW							@configCHECK_FOR_STACK_OVERFLOW@
+#define configUSE_MALLOC_FAILED_HOOK							@configUSE_MALLOC_FAILED_HOOK_Value@
+#define configUSE_DAEMON_TASK_STARTUP_HOOK						@configUSE_DAEMON_TASK_STARTUP_HOOK_Value@
+
+/* Run time and task stats gathering related definitions. */
+#define configGENERATE_RUN_TIME_STATS							@configGENERATE_RUN_TIME_STATS_Value@
+#define configUSE_TRACE_FACILITY								@configUSE_TRACE_FACILITY_Value@
+#define configUSE_STATS_FORMATTING_FUNCTIONS					@configUSE_STATS_FORMATTING_FUNCTIONS_Value@
+
+/* Co-routine related definitions. */
+#define configUSE_CO_ROUTINES									@configUSE_CO_ROUTINES_Value@
+#define configMAX_CO_ROUTINE_PRIORITIES							@configMAX_CO_ROUTINE_PRIORITIES@
+
+/* Software timer related definitions. */
+#define configUSE_TIMERS										@configUSE_TIMERS_Value@
+#define configTIMER_TASK_PRIORITY								@configTIMER_TASK_PRIORITY@
+#define configTIMER_QUEUE_LENGTH								@configTIMER_QUEUE_LENGTH@
+#define configTIMER_TASK_STACK_DEPTH							@configTIMER_TASK_STACK_DEPTH@
+
+/* Interrupt nesting behaviour configuration. */
+#define configKERNEL_INTERRUPT_PRIORITY							@configKERNEL_INTERRUPT_PRIORITY@
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY					@configMAX_SYSCALL_INTERRUPT_PRIORITY@
+#define configMAX_API_CALL_INTERRUPT_PRIORITY					@configMAX_API_CALL_INTERRUPT_PRIORITY@
+
+/* Define to trap errors during development. */
+// #define configASSERT											@configASSERT@
+
+/* FreeRTOS MPU specific definitions. */
+#define configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS	@configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS_Value@
+
+/* Optional functions - most linkers will remove unused functions anyway. */
+#define INCLUDE_vTaskPrioritySet								@INCLUDE_vTaskPrioritySet_Value@
+#define INCLUDE_uxTaskPriorityGet								@INCLUDE_uxTaskPriorityGet_Value@
+#define INCLUDE_vTaskDelete										@INCLUDE_vTaskDelete_Value@
+#define INCLUDE_vTaskSuspend									@INCLUDE_vTaskSuspend_Value@
+#define INCLUDE_xResumeFromISR									@INCLUDE_xResumeFromISR_Value@
+#define INCLUDE_vTaskDelayUntil									@INCLUDE_vTaskDelayUntil_Value@
+#define INCLUDE_vTaskDelay										@INCLUDE_vTaskDelay_Value@
+#define INCLUDE_xTaskGetSchedulerState							@INCLUDE_xTaskGetSchedulerState_Value@
+#define INCLUDE_xTaskGetCurrentTaskHandle						@INCLUDE_xTaskGetCurrentTaskHandle_Value@
+#define INCLUDE_uxTaskGetStackHighWaterMark						@INCLUDE_uxTaskGetStackHighWaterMark_Value@
+#define INCLUDE_xTaskGetIdleTaskHandle							@INCLUDE_xTaskGetIdleTaskHandle_Value@
+#define INCLUDE_eTaskGetState									@INCLUDE_eTaskGetState_Value@
+#define INCLUDE_xEventGroupSetBitFromISR						@INCLUDE_xEventGroupSetBitFromISR_Value@
+#define INCLUDE_xTimerPendFunctionCall							@INCLUDE_xTimerPendFunctionCall_Value@
+#define INCLUDE_xTaskAbortDelay									@INCLUDE_xTaskAbortDelay_Value@
+#define INCLUDE_xTaskGetHandle									@INCLUDE_xTaskGetHandle_Value@
+#define INCLUDE_xTaskResumeFromISR								@INCLUDE_xTaskResumeFromISR_Value@
+
+#endif /* FREERTOS_CONFIG_H */
