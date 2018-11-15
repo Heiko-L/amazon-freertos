@@ -29,9 +29,17 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#ifndef INC_FREERTOS_H
-	#error "include FreeRTOS.h" must appear in source files before "include queue.h"
-#endif
+/*
+ * For BaseType_t, UBaseType_t
+ *     TickType_t, PRIVILEGED_FUNCTION
+ * RTOSconfig.h includes and sanity checks portmacro.h
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+/*
+ * For StaticQueue_t
+ */
+#include <FreeRTOS.h>
 
 #ifdef __cplusplus
 extern "C" {
