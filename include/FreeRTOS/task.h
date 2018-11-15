@@ -28,9 +28,22 @@
 #ifndef INC_TASK_H
 #define INC_TASK_H
 
-#ifndef INC_FREERTOS_H
-	#error "include FreeRTOS.h must appear in source files before include task.h"
-#endif
+/*
+ * For BaseType_t, UBaseType_t, StackType_t, configSTACK_DEPTH_TYPE
+ *     TickType_t, PRIVILEGED_FUNCTION
+ * RTOSconfig.h includes and sanity checks portmacro.h
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+/*
+ * For StaticTask_t
+ */
+#include <FreeRTOS.h>
+
+/*
+ * For TaskFunction_t
+ */
+#include <projdefs.h>
 
 #ifdef __cplusplus
 extern "C" {
