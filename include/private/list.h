@@ -53,8 +53,16 @@
  * \ingroup FreeRTOSIntro
  */
 
-#ifndef INC_FREERTOS_H
-	#error FreeRTOS.h must be included before list.h
+/*
+ * For UBaseType_t, PRIVILEGED_FUNCTION
+ *     and configuration parameters
+ * RTOSconfig.h includes and sanity checks portmacro.h
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+/* Macros used for basic data corruption checks. */
+#ifndef configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES
+	#define configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES 0
 #endif
 
 #ifndef LIST_H
