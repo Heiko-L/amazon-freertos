@@ -36,11 +36,6 @@
 #include <FreeRTOS/RTOSconfig.h>
 
 /*
- * For StaticTask_t
- */
-#include <FreeRTOS.h>
-
-/*
  * For TaskFunction_t
  */
 #include <projdefs.h>
@@ -115,6 +110,68 @@ typedef struct xMEMORY_REGION
 	uint32_t ulLengthInBytes;
 	uint32_t ulParameters;
 } MemoryRegion_t;
+
+/*
+ * In line with software engineering best practice, especially when supplying a
+ * library that is likely to change in future versions, FreeRTOS implements a
+ * strict data hiding policy.  This means the Task structure used internally by
+ * FreeRTOS is not accessible to application code.  However, if the application
+ * writer wants to statically allocate the memory required to create a task then
+ * the size of the task object needs to be know.  The StaticTask_t structure
+ * below is provided for this purpose.  Its sizes and alignment requirements are
+ * guaranteed to match those of the genuine structure, no matter which
+ * architecture is being used, and no matter how the values in FreeRTOSConfig.h
+ * are set.  Its contents are somewhat obfuscated in the hope users will
+ * recognise that it would be unwise to make direct use of the structure members.
+ */
+typedef struct xSTATIC_TCB
+{
+	void				*pxDummy1;
+	#if ( portUSING_MPU_WRAPPERS == 1 )
+		xMPU_SETTINGS	xDummy2;
+	#endif
+	StaticListItem_t	xDummy3[ 2 ];
+	UBaseType_t			uxDummy5;
+	void				*pxDummy6;
+	uint8_t				ucDummy7[ configMAX_TASK_NAME_LEN ];
+	#if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
+		void			*pxDummy8;
+	#endif
+	#if ( portCRITICAL_NESTING_IN_TCB == 1 )
+		UBaseType_t		uxDummy9;
+	#endif
+	#if ( configUSE_TRACE_FACILITY == 1 )
+		UBaseType_t		uxDummy10[ 2 ];
+	#endif
+	#if ( configUSE_MUTEXES == 1 )
+		UBaseType_t		uxDummy12[ 2 ];
+	#endif
+	#if ( configUSE_APPLICATION_TASK_TAG == 1 )
+		void			*pxDummy14;
+	#endif
+	#if( configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0 )
+		void			*pvDummy15[ configNUM_THREAD_LOCAL_STORAGE_POINTERS ];
+	#endif
+	#if ( configGENERATE_RUN_TIME_STATS == 1 )
+		uint32_t		ulDummy16;
+	#endif
+	#if ( configUSE_NEWLIB_REENTRANT == 1 )
+		struct	_reent	xDummy17;
+	#endif
+	#if ( configUSE_TASK_NOTIFICATIONS == 1 )
+		uint32_t 		ulDummy18;
+		uint8_t 		ucDummy19;
+	#endif
+	#if( ( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) ) || ( portUSING_MPU_WRAPPERS == 1 ) )
+		uint8_t			uxDummy20;
+	#endif
+	#if( INCLUDE_xTaskAbortDelay == 1 )
+		uint8_t ucDummy21;
+	#endif
+	#if ( configUSE_POSIX_ERRNO == 1 )
+		int             iDummy22;
+	#endif
+} StaticTask_t;
 
 /*
  * Parameters required to create an MPU protected task.
