@@ -98,48 +98,6 @@ typedef struct xSTATIC_LIST
 	StaticMiniListItem_t xDummy3;
 } StaticList_t;
 
-/*
- * In line with software engineering best practice, especially when supplying a
- * library that is likely to change in future versions, FreeRTOS implements a
- * strict data hiding policy.  This means the Queue structure used internally by
- * FreeRTOS is not accessible to application code.  However, if the application
- * writer wants to statically allocate the memory required to create a queue
- * then the size of the queue object needs to be know.  The StaticQueue_t
- * structure below is provided for this purpose.  Its sizes and alignment
- * requirements are guaranteed to match those of the genuine structure, no
- * matter which architecture is being used, and no matter how the values in
- * FreeRTOSConfig.h are set.  Its contents are somewhat obfuscated in the hope
- * users will recognise that it would be unwise to make direct use of the
- * structure members.
- */
-typedef struct xSTATIC_QUEUE
-{
-	void *pvDummy1[ 3 ];
-
-	union
-	{
-		void *pvDummy2;
-		UBaseType_t uxDummy2;
-	} u;
-
-	StaticList_t xDummy3[ 2 ];
-	UBaseType_t uxDummy4[ 3 ];
-	uint8_t ucDummy5[ 2 ];
-
-	#if( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) )
-		uint8_t ucDummy6;
-	#endif
-
-	#if ( configUSE_QUEUE_SETS == 1 )
-		void *pvDummy7;
-	#endif
-
-	#if ( configUSE_TRACE_FACILITY == 1 )
-		UBaseType_t uxDummy8;
-		uint8_t ucDummy9;
-	#endif
-
-} StaticQueue_t;
 typedef StaticQueue_t StaticSemaphore_t;
 
 /*
