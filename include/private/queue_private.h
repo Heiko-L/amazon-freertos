@@ -39,14 +39,14 @@
 /*
  * For BaseType_t, UBaseType_t
  *     TickType_t, PRIVILEGED_FUNCTION
- * RTOSconfig.h includes and sanity checks portmacro.h
+ * port.h includes and sanity checks portmacro.h
  */
-#include <FreeRTOS/RTOSconfig.h>
+#include <private/port.h>
 
 /*
  * For StaticQueue_t
  */
-#include <FreeRTOS.h>
+//#include <FreeRTOS.h>
 
 #ifdef __cplusplus
 extern "C" {

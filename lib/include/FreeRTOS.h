@@ -65,39 +65,6 @@ extern "C" {
 	#include <reent.h>
 #endif
 
-/*
- * In line with software engineering best practice, FreeRTOS implements a strict
- * data hiding policy, so the real structures used by FreeRTOS to maintain the
- * state of tasks, queues, semaphores, etc. are not accessible to the application
- * code.  However, if the application writer wants to statically allocate such
- * an object then the size of the object needs to be know.  Dummy structures
- * that are guaranteed to have the same size and alignment requirements of the
- * real objects are used for this purpose.  The dummy list and list item
- * structures below are used for inclusion in such a dummy structure.
- */
-struct xSTATIC_LIST_ITEM
-{
-	TickType_t xDummy1;
-	void *pvDummy2[ 4 ];
-};
-typedef struct xSTATIC_LIST_ITEM StaticListItem_t;
-
-/* See the comments above the struct xSTATIC_LIST_ITEM definition. */
-struct xSTATIC_MINI_LIST_ITEM
-{
-	TickType_t xDummy1;
-	void *pvDummy2[ 2 ];
-};
-typedef struct xSTATIC_MINI_LIST_ITEM StaticMiniListItem_t;
-
-/* See the comments above the struct xSTATIC_LIST_ITEM definition. */
-typedef struct xSTATIC_LIST
-{
-	UBaseType_t uxDummy1;
-	void *pvDummy2;
-	StaticMiniListItem_t xDummy3;
-} StaticList_t;
-
 typedef StaticQueue_t StaticSemaphore_t;
 
 /*

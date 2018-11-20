@@ -62,6 +62,22 @@ typedef void * QueueSetHandle_t;
  */
 typedef void * QueueSetMemberHandle_t;
 
+/* See the comments above the struct xSTATIC_LIST_ITEM definition. */
+struct xSTATIC_MINI_LIST_ITEM
+{
+	TickType_t xDummy1;
+	void *pvDummy2[ 2 ];
+};
+typedef struct xSTATIC_MINI_LIST_ITEM StaticMiniListItem_t;
+
+/* See the comments above the struct xSTATIC_LIST_ITEM definition. */
+typedef struct xSTATIC_LIST
+{
+	UBaseType_t uxDummy1;
+	void *pvDummy2;
+	StaticMiniListItem_t xDummy3;
+} StaticList_t;
+
 /*
  * In line with software engineering best practice, especially when supplying a
  * library that is likely to change in future versions, FreeRTOS implements a

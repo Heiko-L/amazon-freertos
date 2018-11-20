@@ -54,11 +54,15 @@
  */
 
 /*
- * For UBaseType_t, PRIVILEGED_FUNCTION
- *     and configuration parameters
- * RTOSconfig.h includes and sanity checks portmacro.h
+ * For configuration parameters
  */
 #include <FreeRTOS/RTOSconfig.h>
+
+/*
+ * For TickType_t, UBaseType_t, PRIVILEGED_FUNCTION
+ * port.h includes and sanity checks portmacro.h
+ */
+#include <private/port.h>
 
 /* Macros used for basic data corruption checks. */
 #ifndef configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES

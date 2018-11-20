@@ -38,7 +38,7 @@
 /*
  * For TaskFunction_t
  */
-#include <projdefs.h>
+#include <FreeRTOS/common.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -70,6 +70,23 @@ typedef void * TaskHandle_t;
  * conform.
  */
 typedef BaseType_t (*TaskHookFunction_t)( void * );
+
+/*
+ * In line with software engineering best practice, FreeRTOS implements a strict
+ * data hiding policy, so the real structures used by FreeRTOS to maintain the
+ * state of tasks, queues, semaphores, etc. are not accessible to the application
+ * code.  However, if the application writer wants to statically allocate such
+ * an object then the size of the object needs to be know.  Dummy structures
+ * that are guaranteed to have the same size and alignment requirements of the
+ * real objects are used for this purpose.  The dummy list and list item
+ * structures below are used for inclusion in such a dummy structure.
+ */
+struct xSTATIC_LIST_ITEM
+{
+	TickType_t xDummy1;
+	void *pvDummy2[ 4 ];
+};
+typedef struct xSTATIC_LIST_ITEM StaticListItem_t;
 
 /* Task states returned by eTaskGetState. */
 typedef enum

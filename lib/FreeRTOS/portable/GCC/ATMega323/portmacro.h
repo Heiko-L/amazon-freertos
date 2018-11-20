@@ -35,6 +35,8 @@ Changes from V1.2.3
 #ifndef PORTMACRO_H
 #define PORTMACRO_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

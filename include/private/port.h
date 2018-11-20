@@ -32,6 +32,7 @@
 #ifndef PORT_H
 #define PORT_H
 
+#include <FreeRTOS/common.h>
 #include <portmacro.h>
 
 #if portBYTE_ALIGNMENT == 32
@@ -71,6 +72,7 @@ extern "C" {
 #endif
 
 #include <private/mpu_wrappers.h>
+#include <private/list.h>
 
 /*
  * Setup the stack of a new task so it is ready to be placed under the

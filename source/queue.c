@@ -25,17 +25,21 @@
  * 1 tab == 4 spaces!
  */
 
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
 all the API functions to use the MPU wrappers.  That should only be done when
 task.h is included from an application file. */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include <private/port.h>
+#include <FreeRTOS/task.h>
+#include <private/task_private.h>
+#include <FreeRTOS/queue.h>
+#include <private/queue_private.h>
+#include <private/heap.h>
 
 #if ( configUSE_CO_ROUTINES == 1 )
 	#include "croutine.h"
