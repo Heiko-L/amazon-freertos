@@ -29,8 +29,8 @@
  * Portable layer API.  Each function must be defined for each port.
  *----------------------------------------------------------*/
 
-#ifndef PORTABLE_H
-#define PORTABLE_H
+#ifndef HEAP_H
+#define HEAP_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,7 +56,6 @@ typedef struct HeapRegion
  */
 void vPortDefineHeapRegions( const HeapRegion_t * const pxHeapRegions ) PRIVILEGED_FUNCTION;
 
-
 /*
  * Map to the memory management routines required for the port.
  */
@@ -70,5 +69,4 @@ size_t xPortGetMinimumEverFreeHeapSize( void ) PRIVILEGED_FUNCTION;
 }
 #endif
 
-#endif /* PORTABLE_H */
-
+#endif /* HEAP_H */
