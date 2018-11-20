@@ -36,8 +36,6 @@
 extern "C" {
 #endif
 
-#include "mpu_wrappers.h"
-
 /* Used by heap_5.c. */
 typedef struct HeapRegion
 {
