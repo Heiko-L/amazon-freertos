@@ -25,18 +25,8 @@
  * 1 tab == 4 spaces!
  */
 
-
 #ifndef TIMERS_H
 #define TIMERS_H
-
-#ifndef INC_FREERTOS_H
-	#error "include FreeRTOS.h must appear in source files before include timers.h"
-#endif
-
-/*lint -save -e537 This headers are only multiply included if the application code
-happens to also be including task.h. */
-#include "task.h"
-/*lint -restore */
 
 #ifdef __cplusplus
 extern "C" {
@@ -1256,22 +1246,7 @@ TickType_t xTimerGetPeriod( TimerHandle_t xTimer ) PRIVILEGED_FUNCTION;
 */
 TickType_t xTimerGetExpiryTime( TimerHandle_t xTimer ) PRIVILEGED_FUNCTION;
 
-/*
- * Functions beyond this part are not part of the public API and are intended
- * for use by the kernel only.
- */
-BaseType_t xTimerCreateTimerTask( void ) PRIVILEGED_FUNCTION;
-BaseType_t xTimerGenericCommand( TimerHandle_t xTimer, const BaseType_t xCommandID, const TickType_t xOptionalValue, BaseType_t * const pxHigherPriorityTaskWoken, const TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
-
-#if( configUSE_TRACE_FACILITY == 1 )
-	void vTimerSetTimerNumber( TimerHandle_t xTimer, UBaseType_t uxTimerNumber ) PRIVILEGED_FUNCTION;
-	UBaseType_t uxTimerGetTimerNumber( TimerHandle_t xTimer ) PRIVILEGED_FUNCTION;
-#endif
-
 #ifdef __cplusplus
 }
 #endif
 #endif /* TIMERS_H */
-
-
-
