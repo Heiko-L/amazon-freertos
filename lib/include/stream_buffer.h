@@ -63,7 +63,6 @@ extern "C" {
  */
 typedef void * StreamBufferHandle_t;
 
-
 /**
  * message_buffer.h
  *
@@ -827,23 +826,6 @@ BaseType_t xStreamBufferReceiveCompletedFromISR( StreamBufferHandle_t xStreamBuf
  * \ingroup StreamBufferManagement
  */
 BaseType_t xStreamBufferReceiveCompletedFromISR( StreamBufferHandle_t xStreamBuffer, BaseType_t *pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
-
-/* Functions below here are not part of the public API. */
-StreamBufferHandle_t xStreamBufferGenericCreate( size_t xBufferSizeBytes,
-												 size_t xTriggerLevelBytes,
-												 BaseType_t xIsMessageBuffer ) PRIVILEGED_FUNCTION;
-
-StreamBufferHandle_t xStreamBufferGenericCreateStatic( size_t xBufferSizeBytes,
-													   size_t xTriggerLevelBytes,
-													   BaseType_t xIsMessageBuffer,
-													   uint8_t * const pucStreamBufferStorageArea,
-													   StaticStreamBuffer_t * const pxStaticStreamBuffer ) PRIVILEGED_FUNCTION;
-
-#if( configUSE_TRACE_FACILITY == 1 )
-	void vStreamBufferSetStreamBufferNumber( StreamBufferHandle_t xStreamBuffer, UBaseType_t uxStreamBufferNumber ) PRIVILEGED_FUNCTION;
-	UBaseType_t uxStreamBufferGetStreamBufferNumber( StreamBufferHandle_t xStreamBuffer ) PRIVILEGED_FUNCTION;
-	uint8_t ucStreamBufferGetStreamBufferType( StreamBufferHandle_t xStreamBuffer ) PRIVILEGED_FUNCTION;
-#endif
 
 #if defined( __cplusplus )
 }
