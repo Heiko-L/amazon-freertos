@@ -34,6 +34,7 @@
 
 #include <FreeRTOS/common.h>
 #include <portmacro.h>
+#include <FreeRTOS/mpu_wrappers.h>
 
 #if portBYTE_ALIGNMENT == 32
 	#define portBYTE_ALIGNMENT_MASK ( 0x001f )
@@ -70,9 +71,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <private/mpu_wrappers.h>
-#include <private/list.h>
 
 /*
  * Setup the stack of a new task so it is ready to be placed under the
