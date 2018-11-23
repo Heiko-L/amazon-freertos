@@ -28,12 +28,18 @@
 #ifndef INC_TASK_H
 #define INC_TASK_H
 
+#include <stdint.h>
+
+/*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
 /*
  * For BaseType_t, UBaseType_t, StackType_t, configSTACK_DEPTH_TYPE
  *     TickType_t, PRIVILEGED_FUNCTION
- * RTOSconfig.h includes and sanity checks portmacro.h
  */
-#include <FreeRTOS/RTOSconfig.h>
+#include <FreeRTOS/port.h>
 
 /*
  * For TaskFunction_t

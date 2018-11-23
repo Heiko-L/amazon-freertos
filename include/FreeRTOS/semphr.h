@@ -28,6 +28,13 @@
 #ifndef SEMAPHORE_H
 #define SEMAPHORE_H
 
+/*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+#include <FreeRTOS/queue.h>
+
 typedef QueueHandle_t SemaphoreHandle_t;
 
 #define semBINARY_SEMAPHORE_QUEUE_LENGTH	( ( uint8_t ) 1U )

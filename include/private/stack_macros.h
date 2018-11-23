@@ -29,6 +29,11 @@
 #define STACK_MACROS_H
 
 /*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+/*
  * Call the stack overflow hook function if the stack of the task being swapped
  * out is currently overflowed, or looks like it might have overflowed in the
  * past.

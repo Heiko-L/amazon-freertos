@@ -30,11 +30,15 @@
 #define QUEUE_H
 
 /*
- * For BaseType_t, UBaseType_t
- *     TickType_t, PRIVILEGED_FUNCTION
- * RTOSconfig.h includes and sanity checks portmacro.h
+ * For configuration macros
  */
 #include <FreeRTOS/RTOSconfig.h>
+
+/*
+ * For BaseType_t, UBaseType_t
+ *     TickType_t, PRIVILEGED_FUNCTION
+ */
+#include <FreeRTOS/port.h>
 
 #ifdef __cplusplus
 extern "C" {

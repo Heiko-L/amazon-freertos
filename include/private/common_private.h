@@ -28,6 +28,11 @@
 #ifndef PROJDEFS_PRIVATE_H
 #define PROJDEFS_PRIVATE_H
 
+/*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
 #if( configUSE_16_BIT_TICKS == 1 )
 	#define pdINTEGRITY_CHECK_VALUE 0x5a5a
 #else

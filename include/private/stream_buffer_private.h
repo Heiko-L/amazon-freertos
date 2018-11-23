@@ -51,6 +51,19 @@
 #ifndef STREAM_BUFFER_PRIVATE_H
 #define STREAM_BUFFER_PRIVATE_H
 
+/*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+/*
+ * For BaseType_t, UBaseType_t, StackType_t, configSTACK_DEPTH_TYPE
+ *     TickType_t, PRIVILEGED_FUNCTION
+ */
+#include <FreeRTOS/port.h>
+
+#include <FreeRTOS/stream_buffer.h>
+
 #if defined( __cplusplus )
 extern "C" {
 #endif

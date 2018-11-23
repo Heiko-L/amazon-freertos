@@ -28,12 +28,16 @@
 #ifndef EVENT_GROUPS_H
 #define EVENT_GROUPS_H
 
-#ifndef INC_FREERTOS_H
-	#error "include FreeRTOS.h" must appear in source files before "include event_groups.h"
-#endif
+/*
+ * For configuration definitions
+ */
+#include <FreeRTOS/RTOSconfig.h>
 
-/* FreeRTOS includes. */
-#include "timers.h"
+/*
+ * For BaseType_t, UBaseType_t, StackType_t, configSTACK_DEPTH_TYPE
+ *     TickType_t, PRIVILEGED_FUNCTION
+ */
+#include <FreeRTOS/port.h>
 
 #ifdef __cplusplus
 extern "C" {

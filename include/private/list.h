@@ -62,7 +62,7 @@
  * For TickType_t, UBaseType_t, PRIVILEGED_FUNCTION
  * port.h includes and sanity checks portmacro.h
  */
-#include <private/port.h>
+#include <FreeRTOS/port.h>
 
 /* Macros used for basic data corruption checks. */
 #ifndef configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES

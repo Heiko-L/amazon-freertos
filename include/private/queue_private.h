@@ -41,12 +41,7 @@
  *     TickType_t, PRIVILEGED_FUNCTION
  * port.h includes and sanity checks portmacro.h
  */
-#include <private/port.h>
-
-/*
- * For StaticQueue_t
- */
-//#include <FreeRTOS.h>
+#include <FreeRTOS/port.h>
 
 #ifdef __cplusplus
 extern "C" {

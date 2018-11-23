@@ -28,6 +28,16 @@
 #ifndef TIMERS_H
 #define TIMERS_H
 
+#include <stdint.h>
+
+/*
+ * For configuration macros
+ */
+#include <FreeRTOS/RTOSconfig.h>
+
+#include <FreeRTOS/port.h>
+#include <FreeRTOS/task.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -51,6 +51,12 @@
 #ifndef STREAM_BUFFER_H
 #define STREAM_BUFFER_H
 
+/*
+ * For BaseType_t, UBaseType_t, StackType_t, configSTACK_DEPTH_TYPE
+ *     TickType_t, PRIVILEGED_FUNCTION
+ */
+#include <FreeRTOS/port.h>
+
 #if defined( __cplusplus )
 extern "C" {
 #endif
@@ -62,6 +68,30 @@ extern "C" {
  * etc.
  */
 typedef void * StreamBufferHandle_t;
+
+/*
+* In line with software engineering best practice, especially when supplying a
+* library that is likely to change in future versions, FreeRTOS implements a
+* strict data hiding policy.  This means the stream buffer structure used
+* internally by FreeRTOS is not accessible to application code.  However, if
+* the application writer wants to statically allocate the memory required to
+* create a stream buffer then the size of the stream buffer object needs to be
+* know.  The StaticStreamBuffer_t structure below is provided for this purpose.
+* Its size and alignment requirements are guaranteed to match those of the
+* genuine structure, no matter which architecture is being used, and no matter
+* how the values in FreeRTOSConfig.h are set.  Its contents are somewhat
+* obfuscated in the hope users will recognise that it would be unwise to make
+* direct use of the structure members.
+*/
+typedef struct xSTATIC_STREAM_BUFFER
+{
+	size_t uxDummy1[ 4 ];
+	void * pvDummy2[ 3 ];
+	uint8_t ucDummy3;
+	#if ( configUSE_TRACE_FACILITY == 1 )
+		UBaseType_t uxDummy4;
+	#endif
+} StaticStreamBuffer_t;
 
 /**
  * message_buffer.h

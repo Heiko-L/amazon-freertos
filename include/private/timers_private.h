@@ -30,7 +30,7 @@
 #define TIMERS_PRVATE_H
 
 #include <FreeRTOS/RTOSConfig.h>
-#include <private/port.h>
+#include <FreeRTOS/port.h>
 #include <FreeRTOS/timers.h>
 
 #ifdef __cplusplus
