@@ -32,6 +32,11 @@ task.h is included from an application file. */
 
 /* FreeRTOS includes. */
 #include <FreeRTOS/RTOSConfig.h>
+#include <FreeRTOS/event_groups.h>
+#include <private/list.h>
+#include <private/heap.h>
+#include <FreeRTOS/task.h>
+#include <private/task_private.h>
 
 /* Lint e961 and e750 are suppressed as a MISRA exception justified because the
 MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined for the

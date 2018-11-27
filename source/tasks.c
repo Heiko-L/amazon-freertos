@@ -39,7 +39,7 @@ task.h is included from an application file. */
 
 //#include "timers.h"
 
-#include <private/port.h>
+#include <FreeRTOS/port.h>
 #include <FreeRTOS/task.h>
 
 /*
