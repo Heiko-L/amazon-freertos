@@ -6,7 +6,5 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "ATmega323")
 endif(CMAKE_SYSTEM_PROCESSOR STREQUAL "ATmega323")
 
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
-	include_directories(port/atmega88/include)
-	set(INSTALL_HEADERS ${INSTALL_HEADERS} port/atmega88/include/FreeRTOS/portmacro.h)
-	set(OPTIONAL_SOURCE_FILES ${OPTIONAL_SOURCE_FILES} port/atmega88/source/port.c)
+	add_subdirectory (port/atmega88)
 endif(CMAKE_SYSTEM_PROCESSOR STREQUAL "atmega88")
