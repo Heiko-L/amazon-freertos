@@ -60,4 +60,3 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 install(TARGETS ${globalLibName} DESTINATION lib)
 install(FILES ${myHeaderFiles} DESTINATION include/FreeRTOS)
-install(FILES ${myPrivateHeaderFiles} DESTINATION include/FreeRTOS/private)
