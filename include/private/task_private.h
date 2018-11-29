@@ -66,22 +66,7 @@ typedef enum
  * SCHEDULER INTERNALS AVAILABLE FOR PORTING PURPOSES
  *----------------------------------------------------------*/
 
-/*
- * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS ONLY
- * INTENDED FOR USE WHEN IMPLEMENTING A PORT OF THE SCHEDULER AND IS
- * AN INTERFACE WHICH IS FOR THE EXCLUSIVE USE OF THE SCHEDULER.
- *
- * Called from the real time kernel tick (either preemptive or cooperative),
- * this increments the tick count and checks if any tasks that are blocked
- * for a finite period required removing from a blocked list and placing on
- * a ready list.  If a non-zero value is returned then a context switch is
- * required because either:
- *   + A task was removed from a blocked list because its timeout had expired,
- *     or
- *   + Time slicing is in use and there is a task of equal priority to the
- *     currently running task.
- */
-BaseType_t xTaskIncrementTick( void ) PRIVILEGED_FUNCTION;
+
 
 /*
  * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS AN
@@ -156,16 +141,6 @@ void vTaskPlaceOnEventListRestricted( List_t * const pxEventList, TickType_t xTi
  */
 BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList ) PRIVILEGED_FUNCTION;
 void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem, const TickType_t xItemValue ) PRIVILEGED_FUNCTION;
-
-/*
- * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS ONLY
- * INTENDED FOR USE WHEN IMPLEMENTING A PORT OF THE SCHEDULER AND IS
- * AN INTERFACE WHICH IS FOR THE EXCLUSIVE USE OF THE SCHEDULER.
- *
- * Sets the pointer to the current TCB to the TCB of the highest priority task
- * that is ready to run.
- */
-void vTaskSwitchContext( void ) PRIVILEGED_FUNCTION;
 
 /*
  * THESE FUNCTIONS MUST NOT BE USED FROM APPLICATION CODE.  THEY ARE USED BY
