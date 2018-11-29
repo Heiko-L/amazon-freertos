@@ -68,6 +68,10 @@
 	#define portNUM_CONFIGURABLE_REGIONS 1
 #endif
 
+#ifndef portPOINTER_SIZE_TYPE
+	#define portPOINTER_SIZE_TYPE uint32_t
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

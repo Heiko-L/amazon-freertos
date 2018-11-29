@@ -254,10 +254,6 @@ extern "C" {
 	#define pcQueueGetName( xQueue )
 #endif
 
-#ifndef portPOINTER_SIZE_TYPE
-	#define portPOINTER_SIZE_TYPE uint32_t
-#endif
-
 /* Remove any unused trace macros. */
 #ifndef traceSTART
 	/* Used to perform any necessary initialisation - for example, open a file
