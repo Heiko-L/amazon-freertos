@@ -33,7 +33,7 @@
 #define PORT_H
 
 #include <FreeRTOS/common.h>
-#include <portmacro.h>
+#include <FreeRTOS/portmacro.h>
 #include <FreeRTOS/mpu_wrappers.h>
 
 #if portBYTE_ALIGNMENT == 32
