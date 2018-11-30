@@ -1,5 +1,4 @@
-add_subdirectory (controller_specific)
-add_subdirectory (heap_implementation)
+add_subdirectory (heap)
 
 file(RELATIVE_PATH
     relPath # Output variable
