@@ -37,9 +37,6 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 add_subdirectory (include)
 add_subdirectory (source)
 
-include_directories("${myAdditionalIncludes}")
-
-message(STATUS "myAdditionalIncludes:" "${myAdditionalIncludes}")
 message(STATUS "myHeaderFiles:" "${myHeaderFiles}")
 message(STATUS "myPrivateHeaderFiles:" "${myPrivateHeaderFiles}")
 message(STATUS "mySourceFiles:" "${mySourceFiles}")
