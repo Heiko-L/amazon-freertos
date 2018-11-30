@@ -36,7 +36,7 @@
  * See heap_1.c, heap_2.c and heap_4.c for alternative implementations, and the
  * memory management pages of http://www.FreeRTOS.org for more information.
  */
-
+ 
 #include <stdlib.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
@@ -44,8 +44,8 @@ all the API functions to use the MPU wrappers.  That should only be done when
 task.h is included from an application file. */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
-#include "FreeRTOS.h"
-#include "task.h"
+#include <FreeRTOS/RTOSConfig.h>
+#include <FreeRTOS/task.h>
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
