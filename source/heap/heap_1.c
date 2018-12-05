@@ -55,15 +55,22 @@ task.h is included from an application file. */
 #define configADJUSTED_HEAP_SIZE	( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
 
 /* Allocate the memory for the heap. */
-/* Allocate the memory for the heap. */
 #if( configAPPLICATION_ALLOCATED_HEAP == 1 )
 	/* The application writer has already defined the array used for the RTOS
 	heap - probably so it can be placed in a special segment or address. */
-	extern uint8_t ucHeap[];
-	extern uint16_t usExternGetHeapSize(void);
+	#if( configAPPLICATION_ALLOCATED_HEAP_SIZE == 1 )
+		extern uint8_t ucHeap[];
+		extern uint16_t usApplicationHeapGetSize(void);
+		#define configADJUSTED_HEAP_SIZE	( usApplicationHeapGetSize() - portBYTE_ALIGNMENT )
+	#else
+		extern uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+	#endif
+	
 #else
 	static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
 #endif /* configAPPLICATION_ALLOCATED_HEAP */
+
+#if
 
 /* Index into the ucHeap array. */
 static size_t xNextFreeByte = ( size_t ) 0;
