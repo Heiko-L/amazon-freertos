@@ -20,7 +20,6 @@ include(CMake/FreeRTOSConfigDependencies.cmake)
 
 configure_file("CMake/FreeRTOSConfig.h.in" "FreeRTOSConfig.h" @ONLY)
 configure_file("CMake/FreeRTOS_uc.h.in" "FreeRTOS_uc.h" @ONLY)
-configure_file("CMake/FreeRTOSExternProvided.h.in" "FreeRTOSExternProvided.h" @ONLY)
 
 list(APPEND myHeaderFiles "${CMAKE_CURRENT_BINARY_DIR}/FreeRTOSConfig.h")
 list(APPEND myHeaderFiles "${CMAKE_CURRENT_BINARY_DIR}/FreeRTOS_uc.h")
