@@ -25,8 +25,9 @@
  * 1 tab == 4 spaces!
  */
 
-/* Standard includes. */
-//#include <stdlib.h>
+/* For size_t */ 
+#include <stddef.h>
+
 #include <string.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining

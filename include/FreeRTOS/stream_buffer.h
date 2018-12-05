@@ -57,6 +57,9 @@
  */
 #include <FreeRTOS/port.h>
 
+/* For size_t */ 
+#include <stddef.h>
+
 #if defined( __cplusplus )
 extern "C" {
 #endif

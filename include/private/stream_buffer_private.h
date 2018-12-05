@@ -51,6 +51,9 @@
 #ifndef STREAM_BUFFER_PRIVATE_H
 #define STREAM_BUFFER_PRIVATE_H
 
+/* For size_t */ 
+#include <stddef.h>
+
 /*
  * For configuration definitions
  */

@@ -33,7 +33,10 @@
  * See heap_2.c, heap_3.c and heap_4.c for alternative implementations, and the
  * memory management pages of http://www.FreeRTOS.org for more information.
  */
-//#include <stdlib.h>
+
+/* For size_t */ 
+#include <stddef.h>
+
 #include <stdint.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining

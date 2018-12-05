@@ -32,6 +32,9 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+/* For size_t */ 
+#include <stddef.h>
+
 #include <stdint.h>
 #include <FreeRTOS/port.h>
 
