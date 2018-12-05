@@ -6,7 +6,8 @@ file(RELATIVE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR} # Absolute path to the file
 )
 
-include_directories(${relPath})
+list(APPEND myIncludeDirs "${relPath}")
 
 # sending myHeaderFiles down the tree...
 set(myHeaderFiles "${myHeaderFiles}" PARENT_SCOPE)
+set(myIncludeDirs "${myIncludeDirs}" PARENT_SCOPE)

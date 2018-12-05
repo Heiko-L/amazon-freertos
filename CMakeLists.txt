@@ -30,15 +30,16 @@ option(Compile_Timers "Compile timers.c" OFF)
 option(Compile_EventGroups "Compile event_groups.c" OFF)
 set (Compile_Heap_Model "1" CACHE STRING "Compile heapx.c, set to 0 for your own memory allocation")
 
-include_directories(include)
-include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-
 add_subdirectory (include)
 add_subdirectory (source)
 
 message(STATUS "myHeaderFiles:" "${myHeaderFiles}")
-message(STATUS "myPrivateHeaderFiles:" "${myPrivateHeaderFiles}")
+message(STATUS "myIncludeDirs:" "${myIncludeDirs}")
 message(STATUS "mySourceFiles:" "${mySourceFiles}")
+
+include_directories(include)
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+include_directories("${myIncludeDirs}")
 
 add_library(${globalLibName} ${mySourceFiles})
 
