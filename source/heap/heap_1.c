@@ -51,9 +51,6 @@ task.h is included from an application file. */
 	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
 #endif
 
-/* A few bytes might be lost to byte aligning the heap start address. */
-#define configADJUSTED_HEAP_SIZE	( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
-
 /* Allocate the memory for the heap. */
 #if( configAPPLICATION_ALLOCATED_HEAP == 1 )
 	/* The application writer has already defined the array used for the RTOS
@@ -64,13 +61,14 @@ task.h is included from an application file. */
 		#define configADJUSTED_HEAP_SIZE	( usApplicationHeapGetSize() - portBYTE_ALIGNMENT )
 	#else
 		extern uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+		/* A few bytes might be lost to byte aligning the heap start address. */
+		#define configADJUSTED_HEAP_SIZE	( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
 	#endif
-	
 #else
 	static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+	/* A few bytes might be lost to byte aligning the heap start address. */
+	#define configADJUSTED_HEAP_SIZE	( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
 #endif /* configAPPLICATION_ALLOCATED_HEAP */
-
-#if
 
 /* Index into the ucHeap array. */
 static size_t xNextFreeByte = ( size_t ) 0;
