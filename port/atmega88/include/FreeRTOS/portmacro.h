@@ -75,7 +75,7 @@ typedef unsigned char UBaseType_t;
 #endif
 /*-----------------------------------------------------------*/
 
-extern void FreeRTOSTimerSetup(void);
+extern void FreeRTOSTimerStart(void);
 
 /* Critical section management. */
 #define portENTER_CRITICAL()		asm volatile ( "in		__tmp_reg__, __SREG__" :: );	\
@@ -91,7 +91,11 @@ extern void FreeRTOSTimerSetup(void);
 
 /* Architecture specifics. */
 #define portSTACK_GROWTH			( -1 )
-#define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
+
+#if ( configAPPLICATION_DEFINED_TICK_RATE == 0 )
+	#define portTICK_PERIOD_MS			( ( TickType_t ) 1000 / configTICK_RATE_HZ )
+#endif
+
 #define portBYTE_ALIGNMENT			1
 #define portNOP()					asm volatile ( "nop" );
 /*-----------------------------------------------------------*/

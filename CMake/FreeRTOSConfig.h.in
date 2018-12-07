@@ -28,6 +28,7 @@
 #define configTOTAL_HEAP_SIZE									@configTOTAL_HEAP_SIZE@
 #define configAPPLICATION_ALLOCATED_HEAP						@configAPPLICATION_ALLOCATED_HEAP_Value@
 #define configAPPLICATION_ALLOCATED_HEAP_SIZE					@configAPPLICATION_ALLOCATED_HEAP_SIZE_Value@
+#define configAPPLICATION_DEFINED_TICK_RATE						@configAPPLICATION_DEFINED_TICK_RATE_Value@
 
 /* Hook function related definitions. */
 #define configUSE_IDLE_HOOK										@configUSE_IDLE_HOOK_Value@

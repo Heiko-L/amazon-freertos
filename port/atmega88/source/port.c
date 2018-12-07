@@ -173,7 +173,7 @@ uint16_t usAddress;
 BaseType_t xPortStartScheduler( void )
 {
 	/* Setup the hardware to generate the tick. */
-	FreeRTOSTimerSetup();
+	FreeRTOSTimerStart();
 
 	/* Restore the context of the first task that is going to run. */
 	portRESTORE_CONTEXT();
