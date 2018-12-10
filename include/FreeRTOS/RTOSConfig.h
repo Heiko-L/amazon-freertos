@@ -33,7 +33,7 @@ extern "C" {
 #endif
 
 /* Application specific configuration options. */
-#include <FreeRTOSConfig.h>
+#include <FreeRTOS/FreeRTOSConfig.h>
 
 /* Must be defaulted before configUSE_NEWLIB_REENTRANT is used below. */
 #ifndef configUSE_NEWLIB_REENTRANT
