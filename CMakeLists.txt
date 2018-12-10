@@ -21,7 +21,6 @@ include(CMake/FreeRTOSConfigDependencies.cmake)
 configure_file("CMake/FreeRTOSConfig.h.in" "FreeRTOSConfig.h" @ONLY)
 
 list(APPEND myHeaderFiles "${CMAKE_CURRENT_BINARY_DIR}/FreeRTOSConfig.h")
-list(APPEND myHeaderFiles "${CMAKE_CURRENT_BINARY_DIR}/FreeRTOSExternProvided.h")
 
 option(Compile_Queue "Compile queue.c" OFF)
 option(Compile_Timers "Compile timers.c" OFF)
