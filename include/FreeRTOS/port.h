@@ -32,9 +32,9 @@
 #ifndef PORT_H
 #define PORT_H
 
-#include <FreeRTOS/common.h>
 #include <FreeRTOS/portmacro.h>
 #include <FreeRTOS/mpu_wrappers.h>
+#include <FreeRTOS/common.h>
 
 #if portBYTE_ALIGNMENT == 32
 	#define portBYTE_ALIGNMENT_MASK ( 0x001f )

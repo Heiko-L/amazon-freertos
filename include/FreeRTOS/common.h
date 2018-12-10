@@ -28,6 +28,10 @@
 #ifndef PROJDEFS_H
 #define PROJDEFS_H
 
+/* For configuration options */
+#include <FreeRTOS/RTOSConfig.h>
+	#include <stdint.h>
+	#include <FreeRTOS/port.h>
 /*
  * Defines the prototype to which task functions must conform.  Defined in this
  * file to ensure the type is known before portable.h is included.
@@ -42,6 +46,9 @@ definition here is not suitable for your application. */
 	#ifndef pdMS_TO_TICKS
 		#define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
 	#endif
+#else
+
+	extern TickType_t pdMS_TO_TICKS( uint16_t xTimeInMs );
 #endif
 
 #define pdFALSE			( ( BaseType_t ) 0 )
