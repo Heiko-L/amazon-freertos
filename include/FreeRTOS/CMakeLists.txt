@@ -7,6 +7,8 @@ file(RELATIVE_PATH
 list(APPEND myHeaderFiles "${relPath}/common.h")
 list(APPEND myHeaderFiles "${relPath}/RTOSConfig.h")
 list(APPEND myHeaderFiles "${relPath}/task.h")
+list(APPEND myHeaderFiles "${relPath}/port.h")
+list(APPEND myHeaderFiles "${relPath}/mpu_wrappers.h")
 
 if (Compile_Queue)
 	list(APPEND myHeaderFiles "${relPath}/queue.h")
