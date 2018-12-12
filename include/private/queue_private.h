@@ -50,7 +50,6 @@ extern "C" {
 /* For internal use only. */
 
 /* For internal use only.  These definitions *must* match those in queue.c. */
-#define queueQUEUE_TYPE_BASE				( ( uint8_t ) 0U )
 #define queueQUEUE_TYPE_SET					( ( uint8_t ) 0U )
 #define queueQUEUE_TYPE_MUTEX 				( ( uint8_t ) 1U )
 #define queueQUEUE_TYPE_COUNTING_SEMAPHORE	( ( uint8_t ) 2U )
