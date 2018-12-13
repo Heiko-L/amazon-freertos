@@ -4,6 +4,8 @@ set(globalLibName "FreeRTOS")
 
 set(myGlobalSourceDir ${CMAKE_CURRENT_SOURCE_DIR})
 
+set(CMAKE_DEBUG_POSTFIX "_d")
+
 # define CMAKE_INSTALL_PREFIX and CMAKE_PREFIX_PATH in crossconfig.cmake
 include(crossconfig.cmake OPTIONAL)
 
@@ -49,7 +51,7 @@ endif()
 target_compile_options(${globalLibName} PUBLIC -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -c -std=gnu99)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -gdwarf-2")
+	set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -gdwarf-2 -gstrict-dwarf")
 endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 install(TARGETS ${globalLibName} DESTINATION lib)
