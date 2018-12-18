@@ -1,10 +1,9 @@
 cmake_minimum_required (VERSION 3.9)
 project (FreeRTOS C)
-set(globalLibName "FreeRTOS")
 
 set(myGlobalSourceDir ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(CMAKE_DEBUG_POSTFIX "_d")
+set(CMAKE_DEBUG_POSTFIX "-dbg")
 
 # define CMAKE_INSTALL_PREFIX and CMAKE_PREFIX_PATH in crossconfig.cmake
 include(crossconfig.cmake OPTIONAL)
@@ -40,19 +39,28 @@ include_directories(include)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 include_directories("${myIncludeDirs}")
 
-add_library(${globalLibName} ${mySourceFiles})
+add_library(${CMAKE_PROJECT_NAME} ${mySourceFiles})
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)
 if(result)
-	set_property(TARGET ${globalLibName} PROPERTY INTERPROCEDURAL_OPTIMIZATION True)
+	set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION True)
 endif()
 
-target_compile_options(${globalLibName} PUBLIC -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -c -std=gnu99)
+target_compile_options	(
+						${CMAKE_PROJECT_NAME} 
+						PUBLIC	-funsigned-char -funsigned-bitfields
+								-ffunction-sections -fdata-sections
+								-fpack-struct -fshort-enums -Wall
+								-Wextra -Wmissing-prototypes -Wstrict-prototypes
+								-c -std=gnu99
+								-B ${MY_ADDITIONAL_GCC_DFP_PATH}
+						)
+target_link_libraries(${CMAKE_PROJECT_NAME} -Wl,--gc-sections "-B ${MY_ADDITIONAL_GCC_DFP_PATH}")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -gdwarf-2 -gstrict-dwarf")
+	set (CMAKE_C_FLAGS_DEBUG "-g3 -O0")
 endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
-install(TARGETS ${globalLibName} DESTINATION lib)
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION lib)
 install(FILES ${myHeaderFiles} DESTINATION include/FreeRTOS)
