@@ -32,9 +32,8 @@
 /*
  * For BaseType_t, UBaseType_t, StackType_t
  *     TickType_t, PRIVILEGED_FUNCTION
- * RTOSconfig.h includes and sanity checks portmacro.h
  */
-#include <FreeRTOS/RTOSconfig.h>
+#include <FreeRTOS/port.h>
 
 /*
  * For List_t, ListItem_t
