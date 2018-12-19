@@ -39,7 +39,6 @@
 /*
  * For BaseType_t, UBaseType_t
  *     TickType_t, PRIVILEGED_FUNCTION
- * port.h includes and sanity checks portmacro.h
  */
 #include <FreeRTOS/port.h>
 

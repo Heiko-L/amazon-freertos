@@ -32,7 +32,7 @@
 #ifndef PORT_H
 #define PORT_H
 
-#include <FreeRTOS/portmacro.h>
+#include <FreeRTOS/port_specific.h>
 #include <FreeRTOS/mpu_wrappers.h>
 #include <FreeRTOS/common.h>
 

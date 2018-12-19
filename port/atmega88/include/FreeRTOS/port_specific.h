@@ -32,6 +32,10 @@ Changes from V1.2.3
 	  base 16.
 */
 
+#ifndef PORT_H
+	#error This file is intended to be included only from FreeRTOS/port.h
+#endif
+
 #ifndef PORTMACRO_H
 #define PORTMACRO_H
 

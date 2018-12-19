@@ -6,6 +6,6 @@ file(RELATIVE_PATH
 
 list(APPEND myHeaderFiles "${relPath}/context_macros.h")
 list(APPEND myHeaderFiles "${relPath}/isr.h")
-list(APPEND myHeaderFiles "${relPath}/portmacro.h")
+list(APPEND myHeaderFiles "${relPath}/port_specific.h")
 
 set(myHeaderFiles "${myHeaderFiles}" PARENT_SCOPE)
