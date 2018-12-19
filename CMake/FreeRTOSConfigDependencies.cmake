@@ -3,22 +3,22 @@
 #
 
 if (INCLUDE_xTimerPendFunctionCall)
-	set(configUSE_TIMERS ON CACHE BOOL "" FORCE)
+	set(configUSE_TIMERS ON CACHE BOOL "")
 endif(INCLUDE_xTimerPendFunctionCall)
 
 if (configUSE_TIMERS)
-	set(Compile_Timers ON CACHE BOOL "" FORCE)
+	set(Compile_Timers ON CACHE BOOL "")
 	set(Compile_Queue ON CACHE BOOL "" FORCE)
 	set(configTIMER_TASK_STACK_DEPTH "configMINIMAL_STACK_SIZE" CACHE STRING "" FORCE)
 	set(configTIMER_QUEUE_LENGTH "1" CACHE STRING "" FORCE)
 endif(configUSE_TIMERS)
 
 if (configTIMER_TASK_STACK_DEPTH STRGREATER "0")
-	set(configUSE_TIMERS ON CACHE BOOL "" FORCE)
-	set(Compile_Timers ON CACHE BOOL "" FORCE)
+	set(configUSE_TIMERS ON CACHE BOOL "")
+	set(Compile_Timers ON CACHE BOOL "")
 else(configTIMER_TASK_STACK_DEPTH STRGREATER "0")
-	set(configUSE_TIMERS OFF CACHE BOOL "" FORCE)
-	set(Compile_Timers OFF CACHE BOOL "" FORCE)
+	set(configUSE_TIMERS OFF CACHE BOOL "")
+	set(Compile_Timers OFF CACHE BOOL "")
 endif(configTIMER_TASK_STACK_DEPTH STRGREATER "0")
 
 #
