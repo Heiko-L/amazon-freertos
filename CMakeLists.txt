@@ -10,7 +10,7 @@ include(crossconfig.cmake OPTIONAL)
 
 # set standard build type
 if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release CACHE STRING
+	set(CMAKE_BUILD_TYPE MinSizeRel CACHE STRING
 		"Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
 		FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
@@ -23,9 +23,9 @@ configure_file("CMake/FreeRTOSConfig.h.in" "include/FreeRTOS/FreeRTOSConfig.h" @
 
 list(APPEND myHeaderFiles "${CMAKE_CURRENT_BINARY_DIR}/include/FreeRTOS/FreeRTOSConfig.h")
 
-option(Compile_Queue "Compile queue.c" OFF)
-option(Compile_Timers "Compile timers.c" OFF)
-option(Compile_EventGroups "Compile event_groups.c" OFF)
+option(Compile_Queue "Compile queue.c" ON)
+option(Compile_Timers "Compile timers.c" ON)
+option(Compile_EventGroups "Compile event_groups.c" ON)
 set (Compile_Heap_Model "1" CACHE STRING "Compile heapx.c, set to 0 for your own memory allocation")
 
 add_subdirectory (include)
