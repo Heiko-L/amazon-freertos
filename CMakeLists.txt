@@ -59,7 +59,7 @@ target_compile_options	(
 target_link_libraries(${CMAKE_PROJECT_NAME} -Wl,--gc-sections "-B ${MY_ADDITIONAL_GCC_DFP_PATH}")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	set (CMAKE_C_FLAGS_DEBUG "-g3 -O0")
+	set (CMAKE_C_FLAGS_DEBUG "-g2 -Og")
 endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION lib)
